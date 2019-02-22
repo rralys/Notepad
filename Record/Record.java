@@ -1,3 +1,7 @@
+package Notepad.Record;
+
+import java.util.Scanner;
+
 public class Record {
 
     private String firstName;
@@ -12,7 +16,7 @@ public class Record {
         this.phoneNumber = phNumber;
     }
 
-    public void setFirstName(string NewFirstName) {
+    public void setFirstName(String NewFirstName) {
         this.firstName = NewFirstName;
     }
 
@@ -50,6 +54,39 @@ public class Record {
 
     public String getPhoneNumber() {
         return phoneNumber;
+    }
+
+    public Record populateRecord() {
+
+        Scanner input = new Scanner(System.in);
+        System.out.println("The record is empty. Please provide details.");
+
+        System.out.println("First name: ");
+        String firstName = input.nextLine();
+
+        System.out.println("Last name: ");
+        String lastName = input.nextLine();
+
+        System.out.println("Phone number: ");
+        String phoneNumber = input.nextLine();
+
+        return this;
+
+    }
+
+    public String toString() {
+        String res;
+
+        res = firstName + " " + lastName + " " + phoneNumber + " " + email + " " + address;
+
+        return res;
+    }
+
+    public void showRecord(){
+
+        String textRecord = this.toString();
+
+        System.out.println(textRecord);
     }
 
 }
