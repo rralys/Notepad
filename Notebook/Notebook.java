@@ -7,6 +7,7 @@ import static java.lang.System.arraycopy;
 public class Notebook {
 
     private Record[] aNotebook;
+    /*Here we place current value of the latest record in the array which is filled in. Adding a record increases the index by 1, removing a record decreases it.*/
     private int lastRecord;
 
     public void Notebook(Record rec) {
@@ -24,7 +25,6 @@ public class Notebook {
         lastRecord = 1;
 
     }
-
 
     public void setNotebook(Record[] notebook) {
 
