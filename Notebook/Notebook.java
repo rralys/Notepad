@@ -124,7 +124,9 @@ public class Notebook {
     public void showAllRecords(){
 
         for (Record curRec : aNotebook) {
-            curRec.showRecord();
+            if (curRec != null) {
+                curRec.showRecord();
+            }
         }
     }
 }
