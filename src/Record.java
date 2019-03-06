@@ -1,5 +1,3 @@
-package Notepad.Record;
-
 import java.util.Scanner;
 
 public class Record {
@@ -16,8 +14,8 @@ public class Record {
         this.phoneNumber = phNumber;
     }
 
-    public void setFirstName(String NewFirstName) {
-        this.firstName = NewFirstName;
+    public void setFirstName(String newFirstName) {
+        this.firstName = newFirstName;
     }
 
     public void setAddress(String newAddress) {

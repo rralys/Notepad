@@ -1,7 +1,3 @@
-package Notepad.Notebook;
-
-import Notepad.Record.Record;
-
 import static java.lang.System.arraycopy;
 
 public class Notebook {
