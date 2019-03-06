@@ -1,4 +1,5 @@
 import static java.lang.System.arraycopy;
+import static java.lang.Math.floorDiv;
 
 public class Notebook {
 
@@ -8,7 +9,7 @@ public class Notebook {
 
     public void Notebook(Record rec) {
 
-        Record[] aNotebook = new Record[100];
+        aNotebook = new Record[100];
 
         if (rec == null) {
 
@@ -29,13 +30,11 @@ public class Notebook {
 
     public Notebook addRecord(Record rec) {
         int len = aNotebook.length;
-        int newLen;
-
-        newLen = len;
+        int newLen = len;
 
         if (lastRecord == len) {
 
-            newLen = (int) ((int) len * 1.5);
+            newLen = (int) (len * 1.5);
 
         }
 
@@ -59,16 +58,14 @@ public class Notebook {
          * If nothing is found return -1.*/
 
         int len = this.aNotebook.length;
-        int i;
         /*We will return -1 in case if nothing is found.*/
         int res = -1;
 
-        for (i = 0; i < len; i++) {
+        for (int i = 0; i < len; i++) {
 
             Record curRec = aNotebook[i];
-            String curPhoneNumber = curRec.getPhoneNumber();
 
-            if (curPhoneNumber.equals(phoneNumber)) {
+            if (curRec.getPhoneNumber().equals(phoneNumber)) {
                 res = i;
             }
         }
@@ -87,8 +84,8 @@ public class Notebook {
         int len = aNotebook.length;
         int newLen = len;
 
-        if (lastRecord == java.lang.Math.floorDiv(len, 2)) {
-            newLen = (int) ((int) len * 0.75);
+        if (lastRecord == floorDiv(len, 2)) {
+            newLen = (int) (len * 0.75);
         }
 
         Record[] newNotebook = new Record[newLen];
@@ -105,14 +102,14 @@ public class Notebook {
 
     public Notebook editRecord(String phoneNumber, Record newRecord) {
 
-        int recIndex = this.findRecord(phoneNumber);
+        int recIndex = findRecord(phoneNumber);
 
         if (recIndex == -1) {
             System.out.println("Cannot edit the record with phone number " + phoneNumber + "because it is not found.");
             return this;
         }
 
-        this.aNotebook[recIndex] = newRecord;
+        aNotebook[recIndex] = newRecord;
 
         return this;
     }
@@ -121,7 +118,7 @@ public class Notebook {
 
         for (Record curRec : aNotebook) {
             if (curRec != null) {
-                curRec.showRecord();
+                System.out.println(curRec.toString());
             }
         }
     }

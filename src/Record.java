@@ -60,31 +60,21 @@ public class Record {
         System.out.println("The record is empty. Please provide details.");
 
         System.out.println("First name: ");
-        String firstName = input.nextLine();
+        firstName = input.nextLine();
 
         System.out.println("Last name: ");
-        String lastName = input.nextLine();
+        lastName = input.nextLine();
 
         System.out.println("Phone number: ");
-        String phoneNumber = input.nextLine();
+        phoneNumber = input.nextLine();
 
         return this;
 
     }
 
     public String toString() {
-        String res;
 
-        res = firstName + " " + lastName + " " + phoneNumber + " " + email + " " + address;
-
-        return res;
-    }
-
-    public void showRecord(){
-
-        String textRecord = this.toString();
-
-        System.out.println(textRecord);
+        return String.format("%s %s %s %s %s", firstName, lastName, phoneNumber, email, address);
     }
 
 }
