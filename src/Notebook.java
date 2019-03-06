@@ -108,6 +108,11 @@ public class Notebook {
 
     public Notebook editRecord(String phoneNumber, Record newRecord) {
 
+        if (newRecord == null) {
+            System.out.println("Cannot replace a record with null.");
+            return this;
+        }
+
         int recIndex = findRecord(phoneNumber);
 
         if (recIndex == -1) {
