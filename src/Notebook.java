@@ -31,7 +31,7 @@ public class Notebook {
     public Notebook addRecord(Record rec) {
 
         if (rec == null) {
-            System.out.println("Cannot add null record to the notebook");
+            System.out.println("Cannot add null record to the notebook.");
             return this;
         }
 
