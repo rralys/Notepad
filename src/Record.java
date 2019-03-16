@@ -8,7 +8,7 @@ public class Record {
     private String phoneNumber;
     private String email;
 
-    public void Record(String first, String last, String phNumber) {
+    public Record(String first, String last, String phNumber) {
         this.firstName = first;
         this.lastName = last;
         this.phoneNumber = phNumber;
@@ -52,24 +52,6 @@ public class Record {
 
     public String getPhoneNumber() {
         return phoneNumber;
-    }
-
-    public Record populateRecord() {
-
-        Scanner input = new Scanner(System.in);
-        System.out.println("The record is empty. Please provide details.");
-
-        System.out.println("First name: ");
-        firstName = input.nextLine();
-
-        System.out.println("Last name: ");
-        lastName = input.nextLine();
-
-        System.out.println("Phone number: ");
-        phoneNumber = input.nextLine();
-
-        return this;
-
     }
 
     public String toString() {

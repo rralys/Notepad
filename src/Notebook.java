@@ -7,14 +7,13 @@ public class Notebook {
     /*Here we place current value of the latest record in the array which is filled in. Adding a record increases the index by 1, removing a record decreases it.*/
     private int lastRecord;
 
-    public void Notebook(Record rec) {
+    public Notebook(Record rec) {
 
         aNotebook = new Record[100];
 
         if (rec == null) {
 
-            Record curRec = new Record();
-            rec = curRec.populateRecord();
+            System.out.println("Cannot initialize the notebook with empty record.");
 
         }
 
@@ -38,7 +37,7 @@ public class Notebook {
         int len = aNotebook.length;
         int newLen = len;
 
-        if (lastRecord == len) {
+        if (lastRecord == len-1) {
 
             newLen = (int) (len * 1.5);
 
@@ -48,10 +47,14 @@ public class Notebook {
 
         arraycopy(aNotebook, 0, newNotebook, 0, len - 1);
 
-        newNotebook[len] = rec;
         lastRecord++;
+        newNotebook[lastRecord-1] = rec;
 
-        arraycopy(newNotebook,0, aNotebook, 0 , newLen);
+        if (newLen > len) {
+            aNotebook = new Record[newLen];
+        }
+
+        arraycopy(newNotebook,0, aNotebook, 0 , newLen-1);
 
         return this;
     }
@@ -67,9 +70,13 @@ public class Notebook {
         /*We will return -1 in case if nothing is found.*/
         int res = -1;
 
-        for (int i = 0; i < len; i++) {
+        for (int i = 0; i < lastRecord; i++) {
 
             Record curRec = aNotebook[i];
+
+            if (curRec == null) {
+                continue;
+            }
 
             if (curRec.getPhoneNumber().equals(phoneNumber)) {
                 res = i;
@@ -96,10 +103,16 @@ public class Notebook {
 
         Record[] newNotebook = new Record[newLen];
 
-        arraycopy(aNotebook, 0, newNotebook, 0, recIndex - 1);
-        arraycopy(aNotebook, recIndex + 1, newNotebook, recIndex, len - recIndex);
+        int newIndex = recIndex + 1;
+
+        arraycopy(aNotebook, 0, newNotebook, 0, recIndex);
+        arraycopy(aNotebook, newIndex, newNotebook, recIndex, newLen - newIndex);
 
         lastRecord--;
+
+        if (newLen < len) {
+            aNotebook = new Record[newLen];
+        }
 
         arraycopy(newNotebook,0, aNotebook, 0 , newLen);
 
@@ -132,5 +145,13 @@ public class Notebook {
                 System.out.println(curRec.toString());
             }
         }
+    }
+
+    public int getCurrentIndex() {
+        return lastRecord;
+    }
+
+    public Record[] getNotebook(){
+        return aNotebook;
     }
 }
