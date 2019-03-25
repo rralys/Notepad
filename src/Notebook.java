@@ -2,6 +2,9 @@ import static java.lang.System.arraycopy;
 import static java.lang.Math.floorDiv;
 
 public class Notebook {
+    private final int INITIAL_LEN = 100;
+    private final float INC_VALUE = 1.5f;
+    private final float DEC_VALUE = 0.75f;
 
     private Record[] aNotebook;
     /*Here we place current value of the latest record in the array which is filled in. Adding a record increases the index by 1, removing a record decreases it.*/
@@ -9,11 +12,11 @@ public class Notebook {
 
     public Notebook(Record rec) {
 
-        aNotebook = new Record[100];
+        aNotebook = new Record[INITIAL_LEN];
 
         if (rec == null) {
 
-            System.out.println("Cannot initialize the notebook with empty record.");
+            System.out.println("Cannot initialize the notebook with null record.");
 
         }
 
@@ -24,7 +27,9 @@ public class Notebook {
 
     public void setNotebook(Record[] notebook) {
 
-        this.aNotebook = notebook;
+        lastRecord = getLastRecordIndex(notebook); /*find the last record index of the new notebook.*/
+
+        arraycopy(notebook, 0, aNotebook, 0, lastRecord - 1);
     }
 
     public Notebook addRecord(Record rec) {
@@ -39,7 +44,7 @@ public class Notebook {
 
         if (lastRecord == len-1) {
 
-            newLen = (int) (len * 1.5);
+            newLen = (int) (len * INC_VALUE);
 
         }
 
@@ -75,11 +80,12 @@ public class Notebook {
             Record curRec = aNotebook[i];
 
             if (curRec == null) {
-                continue;
+                break; /* we do not add null records, so if a null is reached no further actual records are present and we just return -1.*/
             }
 
             if (curRec.getPhoneNumber().equals(phoneNumber)) {
                 res = i;
+                break;
             }
         }
         return res;
@@ -98,7 +104,7 @@ public class Notebook {
         int newLen = len;
 
         if (lastRecord == floorDiv(len, 2)) {
-            newLen = (int) (len * 0.75);
+            newLen = (int) (len * DEC_VALUE);
         }
 
         Record[] newNotebook = new Record[newLen];
@@ -142,7 +148,7 @@ public class Notebook {
 
         for (Record curRec : aNotebook) {
             if (curRec != null) {
-                System.out.println(curRec.toString());
+                System.out.println(curRec);
             }
         }
     }
@@ -151,7 +157,20 @@ public class Notebook {
         return lastRecord;
     }
 
-    public Record[] getNotebook(){
-        return aNotebook;
+    public int getNotebookLen(){
+        return aNotebook.length;
+    }
+
+    public static int getLastRecordIndex(Record[] notebook) {
+        int res = 0;
+        for (Record curRec : notebook) {
+            if (curRec != null) {
+                res++;
+            } else {
+                break; /*if record is null we reached the end of the actual records array, all entities past null are null as well, because we do not add null records.*/
+            }
+        }
+
+        return res;
     }
 }

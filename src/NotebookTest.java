@@ -10,24 +10,20 @@ public class NotebookTest {
 
 
 @Before
-    public void createRecord() {
-       rec = new Record("John", "Doe", "+10089527354");
-}
-
-@Before
     public void createNotebook() {
+    rec = new Record("John", "Doe", "+10089527354");
     noteBook = new Notebook(rec);
 }
 
 @Test
-    public void testAdd(){
+    public void testAddingRecordIncreasesIndex(){
     noteBook.addRecord(rec);
     int ind = noteBook.getCurrentIndex();
     assertEquals(ind, 2);
 }
 
 @Test
-    public void testRemove() {
+    public void testRemovingRecordDecreasesIndex() {
     noteBook.addRecord(rec);
     noteBook.removeRecord("+10089527354");
     int ind = noteBook.getCurrentIndex();
@@ -35,13 +31,13 @@ public class NotebookTest {
 }
 
 @Test
-    public void testFindRecord() {
+    public void testFindRecordReturnsExistingPhoneNumber() {
     assertEquals(noteBook.findRecord("+10089527354"),0);
 
 }
 
 @Test
-    public void testNewAddedRecordFound() {
+    public void testNewAddedRecordFoundReturnsTheAddedPhoneNumber() {
     Record rec1 = new Record("Mary", "Blind", "+3478956708");
     noteBook.addRecord(rec1);
     assertEquals(noteBook.findRecord("+3478956708"),1);
@@ -49,22 +45,22 @@ public class NotebookTest {
 }
 
 @Test
-    public void testNoRecordFound() {
+    public void testNoRecordFoundReturnsMinusOne() {
     assertEquals(noteBook.findRecord("+79818857467"), -1);
 }
 
 @Test
-    public void testExcessiveAdd() {
+    public void testExcessiveAddingIncreasesArrayLength() {
     for (int i = 0; i < 100; i++) {
         noteBook.addRecord(rec);
     }
     noteBook.addRecord(rec);
 
-    assertEquals(noteBook.getNotebook().length, 150);
+    assertEquals(noteBook.getNotebookLen(), 150);
 }
 
 @Test
-    public void testExcessiveRemove(){
+    public void testExcessiveRemoveDecreasesArrayLength(){
     for (int i = 0; i < 100; i++) {
         noteBook.addRecord(rec);
     }
@@ -72,11 +68,11 @@ public class NotebookTest {
         noteBook.removeRecord("+10089527354");
     }
 
-    assert(noteBook.getNotebook().length<100);
+    assert(noteBook.getNotebookLen()<100);
 }
 
 @Test
-    public void testToString(){
+    public void testToStringReturnsExpectedString(){
     rec.setAddress("Nürnberg, Neuer Markt 3");
     rec.setEmail("jdoe@newmail.com");
     String str = rec.toString();
