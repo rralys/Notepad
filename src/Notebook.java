@@ -48,18 +48,12 @@ public class Notebook {
 
         }
 
-        Record[] newNotebook = new Record[newLen];
-
-        arraycopy(aNotebook, 0, newNotebook, 0, len - 1);
-
-        lastRecord++;
-        newNotebook[lastRecord-1] = rec;
-
-        if (newLen > len) {
-            aNotebook = new Record[newLen];
+        if (newLen == len) {
+            lastRecord++;
+            aNotebook[lastRecord-1] = rec;
+        } else {
+            expandNotebook(newLen, rec);
         }
-
-        arraycopy(newNotebook,0, aNotebook, 0 , newLen-1);
 
         return this;
     }
@@ -172,5 +166,19 @@ public class Notebook {
         }
 
         return res;
+    }
+
+    private void expandNotebook(int newLen, Record rec) {
+        int len = aNotebook.length;
+        Record[] newNotebook = new Record[newLen];
+
+        arraycopy(aNotebook, 0, newNotebook, 0, len - 1);
+
+        lastRecord++;
+        newNotebook[lastRecord-1] = rec;
+
+        aNotebook = new Record[newLen]; /*if we called the expandNotebook method, then new length is greater than old one, so no need to compare.*/
+
+        arraycopy(newNotebook,0, aNotebook, 0 , newLen-1);
     }
 }
