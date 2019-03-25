@@ -143,6 +143,8 @@ public class Notebook {
         for (Record curRec : aNotebook) {
             if (curRec != null) {
                 System.out.println(curRec);
+            } else {
+                break;
             }
         }
     }
