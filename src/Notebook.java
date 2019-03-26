@@ -18,10 +18,12 @@ public class Notebook {
 
             System.out.println("Cannot initialize the notebook with null record.");
 
-        }
+        } else {
 
-        aNotebook[0] = rec;
-        lastRecord = 1;
+            aNotebook[0] = rec;
+            lastRecord = 1;
+
+        }
 
     }
 
